@@ -5,15 +5,20 @@ class Solution:
     def majorityElement(self, nums: List[int]) -> int:
         if not nums:
             return
-        majority = {}
+        count = 0
+        candidate = None
         for num in nums:
-            if num not in majority:
-                majority[num] = 1
+            if count == 0:
+                candidate = num
+            if num == candidate:
+                count +=1
             else:
-                majority[num] += 1
-        largest_key = max(majority, key=majority.get)
+                count -=1
 
-        return largest_key
+        if nums.count(candidate) > len(nums) // 2:
+            return candidate
+        else:
+            return
 
 
 x = Solution()
